@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './guess-form.css';
-
+//add onsubmit
 export default function GuessForm(props) {
     return (
         <form>
