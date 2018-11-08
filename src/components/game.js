@@ -11,8 +11,9 @@ export default class Game extends React.Component {
         this.state = {
             guesses: [10, 15, 25],
             answer: 30,
-            feedback: 'Make your guess!'
-        };
+            feedback: 'Make your guess!',
+            currentGuess: ''
+        }
     }
 
     userMakesGuess(guess) {
@@ -25,23 +26,26 @@ export default class Game extends React.Component {
         }
         if( (this.state.guesses).includes(guess) ){
             this.setState({ feedback:'Try again, you already guessed that one!'});
+            
         } 
-        if(guess === answer){
+        if(guess === this.state.answer){
             this.setState({ feedback:'You guessed it! You win!'})
 
-        } else 
+        } else {
             this.state.guesses.push(guess);
         
+        }
+        
     }
-
-    guessInputHandler()
+// setState(currentGuess: {guess})
+    // guessInputHandler()
 
     render() {
 
         return (
             <div>
                 <Header />
-                <GuessSection feedback={this.state.feedback} />
+                <GuessSection feedback={this.state.feedback}  guessSubmit={guess => this.userMakesGuess(guess)} />
                 <GuessCount count={this.state.guesses.length} />
                 <GuessList guesses={this.state.guesses} />
             </div>
