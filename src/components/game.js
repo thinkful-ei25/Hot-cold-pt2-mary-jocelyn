@@ -17,16 +17,21 @@ export default class Game extends React.Component {
 
     userMakesGuess(guess) {
         if (typeof guess !== 'number') {
-           this.setState.feedback: ('Please input a NUMBER');
+           this.setState({ feedback:'Please input a NUMBER' });
         }
-        if(userGuess < 0 || userGuess > 101){
-            alert('please choose a number between zero and 100');
+        if(guess < 0 || guess > 101){
+            this.setState({ feedback:'Please choose a number between zero and 100' });
             return true;
-
-        else if(guess === answer)
-
         }
+        if( (this.state.guesses).includes(guess) ){
+            this.setState({ feedback:'Try again, you already guessed that one!'});
+        } 
+        if(guess === answer){
+            this.setState({ feedback:'You guessed it! You win!'})
 
+        } else 
+            this.state.guesses.push(guess);
+        
     }
 
     guessInputHandler()
